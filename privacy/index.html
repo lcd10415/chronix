@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chronix Privacy Policy / 隐私政策</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a222c;
+      --text: #e8eef4;
+      --muted: #9aa8b5;
+      --accent: #5eb8ff;
+      --rule: #2a3542;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1d2a3a 0%, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+    h1 { font-size: 1.85rem; margin: 0 0 8px; letter-spacing: -0.02em; }
+    h2 { font-size: 1.15rem; margin: 32px 0 10px; }
+    p, li { color: var(--muted); }
+    a { color: var(--accent); }
+    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; }
+    .lang-switch {
+      display: flex; gap: 8px; margin-bottom: 28px;
+    }
+    .lang-switch button {
+      appearance: none; border: 1px solid var(--rule); background: var(--surface);
+      color: var(--text); border-radius: 8px; padding: 8px 14px; cursor: pointer;
+      font: inherit;
+    }
+    .lang-switch button[aria-pressed="true"] {
+      border-color: var(--accent); color: var(--accent);
+    }
+    .panel {
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 22px 22px 8px;
+    }
+    .hidden { display: none; }
+    ul { padding-left: 1.2em; }
+    footer {
+      margin-top: 28px; font-size: 0.9rem; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" id="btn-zh" aria-pressed="true">中文</button>
+      <button type="button" id="btn-en" aria-pressed="false">English</button>
+    </div>
+
+    <section id="zh" class="panel">
+      <h1>Chronix 隐私政策</h1>
+      <p class="meta">生效日期：2026年11月3日 · 开发者：Fuze（support@fuze.app）</p>
+
+      <p>Chronix（以下简称「本应用」）是一款本地运行的节拍器、调音器与节拍检测工具。我们重视您的隐私。本政策说明本应用如何处理信息。</p>
+
+      <h2>1. 我们收集哪些信息</h2>
+      <p>本应用<strong style="color:var(--text)">默认不收集、不上传、不向我们的服务器发送</strong>您的个人身份信息。应用功能主要在设备本地完成。</p>
+      <ul>
+        <li><strong style="color:var(--text)">麦克风音频</strong>：仅在您使用调音器或节拍检测功能时，用于实时分析音高/节拍。音频在设备本地处理，不会录制保存或上传。</li>
+        <li><strong style="color:var(--text)">应用设置与预设</strong>：速度、拍号、声音、颜色主题、练习提醒等偏好保存在您的设备本地。</li>
+        <li><strong style="color:var(--text)">通知</strong>：若您开启练习提醒，系统会在本地调度通知；我们不会因此获得您的通讯录或其他个人信息。</li>
+      </ul>
+
+      <h2>2. 我们不做什么</h2>
+      <ul>
+        <li>不创建账户，不要求登录</li>
+        <li>不出售、出租或交易用户数据</li>
+        <li>不将麦克风音频用于广告、画像或云端分析</li>
+        <li>不集成用于跨应用追踪的第三方广告标识 SDK（以当前版本为准）</li>
+      </ul>
+
+      <h2>3. 权限说明</h2>
+      <ul>
+        <li><strong style="color:var(--text)">麦克风</strong>：调音器、节拍检测</li>
+        <li><strong style="color:var(--text)">通知</strong>：练习提醒与系统播放控制相关提示（可选）</li>
+        <li><strong style="color:var(--text)">后台音频</strong>：节拍器在切到后台时继续发声</li>
+      </ul>
+      <p>您可随时在系统设置中撤销相应权限；撤销后相关功能将不可用，但不影响其他本地功能。</p>
+
+      <h2>4. 数据存储与删除</h2>
+      <p>偏好与预设存储于设备本地。卸载本应用将删除应用本地数据（以操作系统行为为准）。</p>
+
+      <h2>5. 儿童隐私</h2>
+      <p>本应用面向一般用户，不专门面向 13 岁以下儿童，也不会故意收集儿童的个人信息。</p>
+
+      <h2>6. 政策更新</h2>
+      <p>我们可能不时更新本政策。更新后将在本页面发布新版本并调整生效日期。</p>
+
+      <h2>7. 联系我们</h2>
+      <p>如对本隐私政策有任何疑问，请邮件联系：<a href="mailto:support@fuze.app">support@fuze.app</a></p>
+    </section>
+
+    <section id="en" class="panel hidden">
+      <h1>Chronix Privacy Policy</h1>
+      <p class="meta">Effective date: November 3, 2026 · Developer: Fuze (support@fuze.app)</p>
+
+      <p>Chronix (“the App”) is a locally running metronome, tuner, and beat-detection tool. This policy explains how information is handled.</p>
+
+      <h2>1. Information We Process</h2>
+      <p>The App <strong style="color:var(--text)">does not collect, upload, or transmit personal identity information to our servers by default</strong>. Features run on your device.</p>
+      <ul>
+        <li><strong style="color:var(--text)">Microphone audio</strong>: Used only while you use the tuner or beat detector for on-device pitch/tempo analysis. Audio is processed locally and is not recorded for storage or upload.</li>
+        <li><strong style="color:var(--text)">Settings and presets</strong>: Tempo, time signature, sounds, themes, practice reminders, and similar preferences are stored locally on your device.</li>
+        <li><strong style="color:var(--text)">Notifications</strong>: If you enable practice reminders, notifications are scheduled locally by the system. We do not receive your contacts or other personal information for this purpose.</li>
+      </ul>
+
+      <h2>2. What We Do Not Do</h2>
+      <ul>
+        <li>No accounts or sign-in requirement</li>
+        <li>No selling, renting, or trading of user data</li>
+        <li>No use of microphone audio for advertising, profiling, or cloud analysis</li>
+        <li>No third-party advertising / cross-app tracking identifier SDKs in the current version</li>
+      </ul>
+
+      <h2>3. Permissions</h2>
+      <ul>
+        <li><strong style="color:var(--text)">Microphone</strong>: Tuner and beat detector</li>
+        <li><strong style="color:var(--text)">Notifications</strong>: Optional practice reminders and related system prompts</li>
+        <li><strong style="color:var(--text)">Background audio</strong>: Continues metronome playback when the App is in the background</li>
+      </ul>
+      <p>You may revoke permissions in system settings at any time. Related features will stop working; other local features remain available.</p>
+
+      <h2>4. Storage and Deletion</h2>
+      <p>Preferences and presets are stored on device. Uninstalling the App removes its local data, subject to OS behavior.</p>
+
+      <h2>5. Children’s Privacy</h2>
+      <p>The App is for a general audience and is not directed at children under 13. We do not knowingly collect personal information from children.</p>
+
+      <h2>6. Changes</h2>
+      <p>We may update this policy from time to time. The updated version will be posted on this page with a revised effective date.</p>
+
+      <h2>7. Contact</h2>
+      <p>Questions about this policy: <a href="mailto:support@fuze.app">support@fuze.app</a></p>
+    </section>
+
+    <footer>
+      Chronix · Fuze · <a href="mailto:support@fuze.app">support@fuze.app</a>
+    </footer>
+  </main>
+  <script>
+    const zh = document.getElementById('zh');
+    const en = document.getElementById('en');
+    const btnZh = document.getElementById('btn-zh');
+    const btnEn = document.getElementById('btn-en');
+    function setLang(lang) {
+      const isZh = lang === 'zh';
+      zh.classList.toggle('hidden', !isZh);
+      en.classList.toggle('hidden', isZh);
+      btnZh.setAttribute('aria-pressed', String(isZh));
+      btnEn.setAttribute('aria-pressed', String(!isZh));
+      document.documentElement.lang = isZh ? 'zh-Hans' : 'en';
+    }
+    btnZh.addEventListener('click', () => setLang('zh'));
+    btnEn.addEventListener('click', () => setLang('en'));
+    if ((navigator.language || '').toLowerCase().startsWith('en')) setLang('en');
+  </script>
+</body>
+</html>

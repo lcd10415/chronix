@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chronix — 节拍器 · 调音器</title>
+  <meta name="description" content="Chronix：本地运行的节拍器、调音器与节拍检测。多轨道节奏、轻点测速、练习提醒与小组件。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0b1218;
+      --ink-2: #15202b;
+      --mist: #d7e2ea;
+      --coral: #e84a5f;
+      --teal: #2bbbad;
+      --paper: #f3f7fa;
+      --muted: #8ea0ae;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--paper);
+      font-family: "Noto Sans SC", "Outfit", sans-serif;
+      background:
+        radial-gradient(900px 520px at 12% -8%, rgba(43, 187, 173, 0.22), transparent 55%),
+        radial-gradient(700px 480px at 92% 8%, rgba(232, 74, 95, 0.18), transparent 50%),
+        linear-gradient(165deg, #081018 0%, var(--ink) 42%, #101a24 100%);
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* Hero: one composition, brand first */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      padding: 28px 0 40px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 35%, rgba(8, 16, 24, 0.55) 68%, rgba(8, 16, 24, 0.92) 100%),
+        url("assets/screenshots/01-metronome.png") center top / cover no-repeat;
+      filter: saturate(1.05);
+      transform: scale(1.02);
+      animation: drift 18s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(8,16,24,0.88) 0%, rgba(8,16,24,0.55) 42%, rgba(8,16,24,0.25) 100%);
+      z-index: 1;
+    }
+    .hero-inner { position: relative; z-index: 2; padding-bottom: 8vh; }
+    .brand {
+      font-family: Outfit, sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      letter-spacing: -0.045em;
+      line-height: 0.92;
+      margin: 0 0 18px;
+      background: linear-gradient(120deg, #fff 20%, #b8fff5 55%, #ffb4bf 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rise 900ms cubic-bezier(.2,.8,.2,1) both;
+    }
+    .headline {
+      font-family: Outfit, "Noto Sans SC", sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.25rem, 2.6vw, 1.85rem);
+      letter-spacing: -0.02em;
+      margin: 0 0 10px;
+      max-width: 16ch;
+      animation: rise 900ms 80ms cubic-bezier(.2,.8,.2,1) both;
+    }
+    .lede {
+      margin: 0 0 28px;
+      color: var(--mist);
+      max-width: 34ch;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      animation: rise 900ms 140ms cubic-bezier(.2,.8,.2,1) both;
+    }
+    .cta {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      animation: rise 900ms 200ms cubic-bezier(.2,.8,.2,1) both;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 22px;
+      border-radius: 999px; font-weight: 700;
+      font-family: Outfit, "Noto Sans SC", sans-serif;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--coral); color: #fff; }
+    .btn-ghost { border: 1px solid rgba(215,226,234,0.35); color: var(--paper); backdrop-filter: blur(8px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); }
+
+    section { padding: 88px 0; }
+    .section-kicker {
+      font-family: Outfit, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+      color: var(--teal);
+      margin: 0 0 10px;
+    }
+    .section-title {
+      font-family: Outfit, "Noto Sans SC", sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      letter-spacing: -0.03em;
+      margin: 0 0 12px;
+      font-weight: 800;
+    }
+    .section-copy {
+      color: var(--muted);
+      max-width: 42ch;
+      margin: 0 0 36px;
+      line-height: 1.65;
+    }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .shots figure {
+      margin: 0;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(215,226,234,0.12);
+      background: var(--ink-2);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+      transform: translateY(18px);
+      opacity: 0;
+      animation: rise 800ms cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .shots figure:nth-child(1) { animation-delay: 60ms; }
+    .shots figure:nth-child(2) { animation-delay: 140ms; }
+    .shots figure:nth-child(3) { animation-delay: 220ms; }
+    .shots figure:nth-child(4) { animation-delay: 300ms; }
+    .shots img {
+      display: block; width: 100%; height: auto;
+      transition: transform 500ms ease;
+    }
+    .shots figure:hover img { transform: scale(1.03); }
+    .shots figcaption {
+      padding: 12px 14px 16px;
+      font-size: 0.9rem;
+      color: var(--mist);
+    }
+
+    .privacy-strip {
+      border-top: 1px solid rgba(215,226,234,0.1);
+      border-bottom: 1px solid rgba(215,226,234,0.1);
+      background: rgba(21, 32, 43, 0.55);
+    }
+    .privacy-strip .row {
+      display: flex; flex-wrap: wrap; gap: 18px 40px;
+      align-items: baseline; justify-content: space-between;
+    }
+    .privacy-strip p { color: var(--muted); margin: 8px 0 0; max-width: 48ch; }
+
+    footer {
+      padding: 40px 0 56px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      display: flex; flex-wrap: wrap; gap: 12px 24px;
+      justify-content: space-between;
+    }
+    footer nav { display: flex; gap: 18px; }
+    footer a:hover { color: var(--paper); }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes drift {
+      from { transform: scale(1.02) translateY(0); }
+      to { transform: scale(1.06) translateY(-1.5%); }
+    }
+
+    @media (max-width: 900px) {
+      .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero::before { background-position: 62% top; }
+    }
+    @media (max-width: 560px) {
+      .shots { grid-template-columns: 1fr; width: min(320px, 100%); margin-inline: auto; }
+      .headline { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <p class="brand">Chronix</p>
+      <h1 class="headline">节拍器与调音器，为练琴而做</h1>
+      <p class="lede">多轨道节奏、轻点测速、实时调音与练习提醒。数据默认留在你的 iPhone。</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#shots">查看界面</a>
+        <a class="btn btn-ghost" href="privacy/">隐私政策</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="shots">
+    <div class="wrap">
+      <p class="section-kicker">Product</p>
+      <h2 class="section-title">真机界面</h2>
+      <p class="section-copy">来自 iPhone 真机截图：节拍器、调音器、设置与轻点测速。</p>
+      <div class="shots">
+        <figure>
+          <img src="assets/screenshots/01-metronome.png" width="1179" height="2556" alt="Chronix 节拍器主界面" />
+          <figcaption>节拍器</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/screenshots/02-tuner.png" width="1179" height="2556" alt="Chronix 调音器" />
+          <figcaption>调音器</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/screenshots/03-settings.png" width="1179" height="2556" alt="Chronix 设置" />
+          <figcaption>设置</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/screenshots/04-tap-tempo.png" width="1179" height="2556" alt="Chronix 轻点测速" />
+          <figcaption>轻点测速</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy-strip">
+    <div class="wrap row">
+      <div>
+        <p class="section-kicker">Privacy</p>
+        <h2 class="section-title" style="font-size:1.6rem;margin-bottom:0">本地优先</h2>
+        <p>麦克风仅用于调音与节拍检测；音频在设备本地处理，不上传。无需账号。</p>
+      </div>
+      <div class="cta">
+        <a class="btn btn-ghost" href="privacy/">阅读隐私政策</a>
+        <a class="btn btn-ghost" href="support/">获取支持</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <div>© Fuze · Chronix · <a href="mailto:support@fuze.app">support@fuze.app</a></div>
+    <nav>
+      <a href="privacy/">Privacy</a>
+      <a href="support/">Support</a>
+      <a href="https://github.com/lcd10415/chronix">GitHub</a>
+    </nav>
+  </footer>
+</body>
+</html>
