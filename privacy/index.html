@@ -31,16 +31,26 @@
     p, li { color: var(--muted); }
     a { color: var(--accent); }
     .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; }
+    .top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .back { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+    .back:hover { color: var(--text); }
     .lang-switch {
-      display: flex; gap: 8px; margin-bottom: 28px;
+      display: inline-flex; gap: 2px; padding: 3px;
+      border: 1px solid var(--rule); background: var(--surface);
+      border-radius: 999px;
     }
     .lang-switch button {
-      appearance: none; border: 1px solid var(--rule); background: var(--surface);
-      color: var(--text); border-radius: 8px; padding: 8px 14px; cursor: pointer;
-      font: inherit;
+      appearance: none; border: 0; background: transparent;
+      color: var(--muted); border-radius: 999px; padding: 0 12px;
+      min-height: 30px; cursor: pointer; font: inherit; font-size: 0.85rem; font-weight: 600;
     }
-    .lang-switch button[aria-pressed="true"] {
-      border-color: var(--accent); color: var(--accent);
+    .lang-switch button[aria-pressed="true"],
+    .lang-switch button.is-active {
+      background: color-mix(in srgb, var(--accent) 22%, transparent);
+      color: var(--accent);
     }
     .panel {
       background: color-mix(in srgb, var(--surface) 88%, transparent);
@@ -57,9 +67,12 @@
 </head>
 <body>
   <main>
-    <div class="lang-switch" role="group" aria-label="Language">
-      <button type="button" id="btn-zh" aria-pressed="true">中文</button>
-      <button type="button" id="btn-en" aria-pressed="false">English</button>
+    <div class="top">
+      <a class="back" href="../">← Chronix</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
 
     <section id="zh" class="panel">
@@ -152,22 +165,23 @@
       Chronix · Fuze · <a href="mailto:support@fuze.app">support@fuze.app</a>
     </footer>
   </main>
+  <script src="../assets/i18n.js"></script>
   <script>
-    const zh = document.getElementById('zh');
-    const en = document.getElementById('en');
-    const btnZh = document.getElementById('btn-zh');
-    const btnEn = document.getElementById('btn-en');
-    function setLang(lang) {
-      const isZh = lang === 'zh';
-      zh.classList.toggle('hidden', !isZh);
-      en.classList.toggle('hidden', isZh);
-      btnZh.setAttribute('aria-pressed', String(isZh));
-      btnEn.setAttribute('aria-pressed', String(!isZh));
-      document.documentElement.lang = isZh ? 'zh-Hans' : 'en';
-    }
-    btnZh.addEventListener('click', () => setLang('zh'));
-    btnEn.addEventListener('click', () => setLang('en'));
-    if ((navigator.language || '').toLowerCase().startsWith('en')) setLang('en');
+    (function () {
+      var zh = document.getElementById("zh");
+      var en = document.getElementById("en");
+      function setLang(lang) {
+        var next = ChronixI18n.set(lang);
+        var isZh = next === "zh";
+        zh.classList.toggle("hidden", !isZh);
+        en.classList.toggle("hidden", isZh);
+        ChronixI18n.syncToggle(next);
+        document.documentElement.lang = isZh ? "zh-Hans" : "en";
+        document.title = isZh ? "Chronix 隐私政策" : "Chronix Privacy Policy";
+      }
+      ChronixI18n.bindToggle(document, setLang);
+      setLang(ChronixI18n.get());
+    })();
   </script>
 </body>
 </html>

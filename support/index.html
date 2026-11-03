@@ -4,27 +4,135 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chronix Support / 支持</title>
+  <meta name="description" content="Chronix support — contact Fuze for help with the metronome and tuner app." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
   <style>
-    :root { --ink:#0b1218; --paper:#f3f7fa; --muted:#8ea0ae; --coral:#e84a5f; --mist:#d7e2ea; }
-    body { margin:0; font-family:"Noto Sans SC",Outfit,sans-serif; color:var(--paper);
-      background: radial-gradient(800px 400px at 10% -10%, rgba(43,187,173,.2), transparent 50%), var(--ink); min-height:100vh; }
-    main { max-width:640px; margin:0 auto; padding:64px 20px; }
-    h1 { font-family:Outfit,sans-serif; font-size:2.2rem; letter-spacing:-0.03em; margin:0 0 12px; }
-    p { color:var(--muted); line-height:1.65; }
-    a { color:var(--coral); }
-    .back { display:inline-block; margin-bottom:28px; color:var(--mist); text-decoration:none; }
+    :root {
+      --charcoal: #10141a;
+      --mist: #e6edf4;
+      --silver-soft: #a7b4c2;
+      --blue: #5b8fb3;
+      --gold: #c9a86c;
+      --glass: rgba(30, 38, 50, 0.45);
+      --glass-border: rgba(200, 210, 220, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--mist);
+      font-family: "Noto Sans SC", "Space Grotesk", sans-serif;
+      background:
+        radial-gradient(ellipse 70% 50% at 80% 0%, rgba(58, 109, 146, 0.2), transparent 55%),
+        linear-gradient(165deg, #0c1016 0%, var(--charcoal) 50%, #141a22 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 640px; margin: 0 auto; padding: 40px 20px 80px; }
+    .top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; margin-bottom: 36px; flex-wrap: wrap;
+    }
+    .back {
+      color: var(--silver-soft); text-decoration: none; font-size: 0.95rem;
+    }
+    .back:hover { color: var(--mist); }
+    .lang-switch {
+      display: inline-flex; align-items: center; padding: 3px;
+      border-radius: 999px; border: 1px solid var(--glass-border);
+      background: rgba(16, 20, 26, 0.55); gap: 2px;
+    }
+    .lang-switch button {
+      appearance: none; border: 0; background: transparent;
+      color: var(--silver-soft); font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      min-width: 38px; min-height: 30px; padding: 0 10px; border-radius: 999px; cursor: pointer;
+    }
+    .lang-switch button.is-active,
+    .lang-switch button[aria-pressed="true"] {
+      background: rgba(91, 143, 179, 0.28); color: var(--mist);
+    }
+    .kicker {
+      font-family: "Space Grotesk", sans-serif;
+      text-transform: uppercase; letter-spacing: 0.16em;
+      font-size: 0.72rem; color: var(--gold); margin: 0 0 12px;
+    }
+    h1 {
+      font-family: Syne, "Noto Sans SC", sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      letter-spacing: -0.03em; margin: 0 0 14px;
+    }
+    p { color: var(--silver-soft); line-height: 1.7; margin: 0 0 16px; }
+    a.mail {
+      color: var(--blue); font-weight: 600; text-decoration: none;
+      font-family: "Space Grotesk", sans-serif;
+    }
+    a.mail:hover { text-decoration: underline; }
+    .links { margin-top: 28px; display: flex; gap: 18px; flex-wrap: wrap; }
+    .links a { color: var(--silver-soft); text-decoration: none; font-size: 0.92rem; }
+    .links a:hover { color: var(--mist); }
+    .panel {
+      border: 1px solid var(--glass-border);
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 18px;
+      padding: 28px 24px;
+    }
   </style>
 </head>
 <body>
   <main>
-    <a class="back" href="../">← Chronix</a>
-    <h1>Support</h1>
-    <p>需要帮助？请邮件联系我们，通常几个工作日内回复。</p>
-    <p>Need help with Chronix? Email us and we’ll reply within a few business days.</p>
-    <p><a href="mailto:support@fuze.app?subject=Chronix%20Support">support@fuze.app</a></p>
-    <p><a href="../privacy/">Privacy Policy / 隐私政策</a></p>
+    <div class="top">
+      <a class="back" href="../" data-i18n="back">← Chronix</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+    <div class="panel">
+      <p class="kicker">Support</p>
+      <h1 data-i18n="title">支持</h1>
+      <p data-i18n="body">需要帮助？请邮件联系我们，通常几个工作日内回复。</p>
+      <p><a class="mail" href="mailto:support@fuze.app?subject=Chronix%20Support">support@fuze.app</a></p>
+      <div class="links">
+        <a href="../privacy/" data-i18n="privacy">隐私政策</a>
+        <a href="../" data-i18n="home">返回首页</a>
+      </div>
+    </div>
   </main>
+  <script src="../assets/i18n.js"></script>
+  <script>
+    (function () {
+      var I18N = {
+        zh: {
+          "meta.title": "Chronix 支持",
+          "meta.description": "Chronix 支持：邮件联系 Fuze，获取节拍器与调音器相关帮助。",
+          "back": "← Chronix",
+          "title": "支持",
+          "body": "需要帮助？请邮件联系我们，通常几个工作日内回复。",
+          "privacy": "隐私政策",
+          "home": "返回首页"
+        },
+        en: {
+          "meta.title": "Chronix Support",
+          "meta.description": "Chronix support — email Fuze for help with the metronome and tuner app.",
+          "back": "← Chronix",
+          "title": "Support",
+          "body": "Need help with Chronix? Email us and we’ll reply within a few business days.",
+          "privacy": "Privacy policy",
+          "home": "Back to home"
+        }
+      };
+      function setLang(lang) {
+        var next = ChronixI18n.set(lang);
+        ChronixI18n.apply(I18N, next);
+        ChronixI18n.syncToggle(next);
+      }
+      ChronixI18n.bindToggle(document, setLang);
+      setLang(ChronixI18n.get());
+    })();
+  </script>
 </body>
 </html>
